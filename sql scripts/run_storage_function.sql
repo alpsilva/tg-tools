@@ -6,39 +6,47 @@ CREATE TABLE unidade_storage_size(
     total_size_in_mb TEXT
 );
 
--- Defining function
-CREATE OR REPLACE FUNCTION record_execution_time(
-    num_executions INT,
+-- Defining record_storage_size function
+CREATE OR REPLACE FUNCTION record_storage_size(
     unidade INT,
-    modulo TEXT,
-    comment TEXT,
-    query_text TEXT
-) RETURNS VOID AS
+    comment VARCHAR
+)
+RETURNS VOID AS
 $$
 DECLARE
-    l_start_time TIMESTAMP;
-    l_end_time TIMESTAMP;
-    l_execution_time INTERVAL;
+    unidade_size NUMERIC;
+    unidade_size_in_mb TEXT;
 BEGIN
-    FOR counter IN 1..num_executions LOOP
-        -- Start the timer
-        l_start_time := clock_timestamp();
+    -- Calculate size in bytes
+        IF (comment = 'optimized') THEN
+            SELECT (
+                PG_RELATION_SIZE('test_movimentos_' || unidade) + 
+                PG_RELATION_SIZE('test_processos_' || unidade) +
+                PG_RELATION_SIZE('mat_view_fluxograma_' || unidade) +
+                PG_RELATION_SIZE('mat_view_corregodoria_' || unidade))
+            INTO unidade_size;
+        ELSE
+            SELECT (
+                PG_RELATION_SIZE('test_movimentos_' || unidade) + 
+                PG_RELATION_SIZE('test_processos_' || unidade))
+            INTO unidade_size;
+        END IF;
     
-        -- Execute the query
-        EXECUTE query_text;
+    -- Size in MegaBytes
+    SELECT
+    PG_SIZE_PRETTY(unidade_size)
+    INTO unidade_size_in_mb;
     
-        -- Stop the timer
-        l_end_time := clock_timestamp();
-    
-        -- Calculate the execution time
-        l_execution_time := l_end_time - l_start_time;
-    
-        -- Insert the execution time into the table
-        INSERT INTO query_execution_times (
-                unidade, modulo, comment,
-                query_execution_time)
-        VALUES (unidade, modulo, comment, l_execution_time);
-    END LOOP;
+    INSERT INTO unidade_storage_size (
+            unidade,
+            comment,
+            total_size,
+            total_size_in_mb)
+    VALUES (
+            unidade,
+            comment,
+            unidade_size,
+            unidade_size_in_mb);	
 END;
 $$
 LANGUAGE plpgsql;
