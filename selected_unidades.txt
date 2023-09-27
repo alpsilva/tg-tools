@@ -1,0 +1,11 @@
+-- "processos_44508" maior
+-- "processos_8380" (percentil terminou aqui)
+-- "processos_18104"
+-- "processos_17384"
+-- "processos_14013"
+-- "processos_3843"
+-- "processos_7433"
+-- "processos_14009"
+-- "processos_18228"
+-- "processos_13325"
+-- "processos_18007" menor (percentil começou aqui)
