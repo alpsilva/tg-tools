@@ -94,3 +94,9 @@ SELECT record_execution_time(100, 14009, 'corregedoria', 'optimized', ''' ''');
 SELECT record_execution_time(100, 18228, 'corregedoria', 'optimized', ''' ''');
 SELECT record_execution_time(100, 13325, 'corregedoria', 'optimized', ''' ''');
 SELECT record_execution_time(100, 18007, 'corregedoria', 'optimized', ''' ''');
+
+SELECT unidade, ROUND(EXTRACT(second FROM avg(query_execution_time)), 3)
+FROM query_execution_times
+WHERE modulo = 'fluxograma'
+AND comment = 'original'
+GROUP BY unidade;
