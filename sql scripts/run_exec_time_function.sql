@@ -43,58 +43,6 @@ END;
 $$
 LANGUAGE plpgsql;
 
--- Recording original fluxograma run times
-SELECT record_execution_time(100, 44508, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 8380, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 18104, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 17384, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 14013, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 3843, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 7433, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 14009, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 18228, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 13325, 'fluxograma', 'original', ''' ''');
-SELECT record_execution_time(100, 18007, 'fluxograma', 'original', ''' ''');
-
--- Recording optimized fluxograma run times
-SELECT record_execution_time(100, 44508, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 8380, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 18104, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 17384, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 14013, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 3843, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 7433, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 14009, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 18228, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 13325, 'fluxograma', 'optimized', ''' ''');
-SELECT record_execution_time(100, 18007, 'fluxograma', 'optimized', ''' ''');
-
--- Recording original corregedoria run times
-SELECT record_execution_time(100, 44508, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 8380, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 18104, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 17384, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 14013, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 3843, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 7433, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 14009, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 18228, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 13325, 'corregedoria', 'original', ''' ''');
-SELECT record_execution_time(100, 18007, 'corregedoria', 'original', ''' ''');
-
--- Recording optimized corregedoria run times
-SELECT record_execution_time(100, 44508, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 8380, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 18104, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 17384, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 14013, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 3843, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 7433, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 14009, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 18228, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 13325, 'corregedoria', 'optimized', ''' ''');
-SELECT record_execution_time(100, 18007, 'corregedoria', 'optimized', ''' ''');
-
 SELECT unidade, ROUND(EXTRACT(second FROM avg(query_execution_time)), 3)
 FROM query_execution_times
 WHERE modulo = 'fluxograma'
