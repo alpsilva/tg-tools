@@ -20,15 +20,15 @@ BEGIN
     -- Calculate size in bytes
         IF (comment = 'optimized') THEN
             SELECT (
-                PG_RELATION_SIZE('test_movimentos_' || unidade) + 
-                PG_RELATION_SIZE('test_processos_' || unidade) +
+                PG_RELATION_SIZE('movimentos_' || unidade) + 
+                PG_RELATION_SIZE('processos_' || unidade) +
                 PG_RELATION_SIZE('mat_view_fluxograma_' || unidade) +
                 PG_RELATION_SIZE('mat_view_corregodoria_' || unidade))
             INTO unidade_size;
         ELSE
             SELECT (
-                PG_RELATION_SIZE('test_movimentos_' || unidade) + 
-                PG_RELATION_SIZE('test_processos_' || unidade))
+                PG_RELATION_SIZE('movimentos_' || unidade) + 
+                PG_RELATION_SIZE('processos_' || unidade))
             INTO unidade_size;
         END IF;
     
